@@ -15,7 +15,7 @@ The watch face renders a real-time orbit system centered on the Sun:
 To signal your approximate location on Earth (local meridian/timezone) relative to the Sun, a red pointer line starts at the Earth's surface and extends all the way to the circular edge of the screen.
 
 The line is rotated dynamically based on both the Earth's orbital position and the time of day:
-$$\text{Rotation Angle} = \text{[DAY\_OF\_YEAR]} \times 0.9863^\circ + \text{[HOUR\_0\_23]} \times 15^\circ + \text{[MINUTE]} \times 0.25^\circ + 90^\circ$$
+$$\text{Rotation Angle} = \text{[DAY\\_OF\\_YEAR]} \times 0.9863^\circ + \text{[HOUR\\_0\\_23]} \times 15^\circ + \text{[MINUTE]} \times 0.25^\circ + 90^\circ$$
 
 * **Orbital Angle (`[DAY_OF_YEAR] * 0.9863`)**: Offsets the rotation so the zero-point is relative to where the Earth currently resides in its 365-day orbit.
 * **Rotation Rate (`15°/hour` & `0.25°/minute`)**: Represents the Earth's $360^\circ$ rotation on its axis over 24 hours.
