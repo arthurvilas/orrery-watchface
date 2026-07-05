@@ -2,6 +2,8 @@
 
 An astronomical Wear OS watch face showing a real-time mechanical model of the solar system (Sun, Earth, and Moon) built using the modern **Watch Face Format (WFF) version 2**.
 
+![Orrery Watch Face](screenshot.png)
+
 ---
 
 ## 🌌 Visual & Astronomical Mechanics
