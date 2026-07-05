@@ -99,5 +99,34 @@
             </PartText>
         </Group>
 
+        <!-- Bottom rectangular complication slot -->
+        <ComplicationSlot slotId="10"
+                          supportedTypes="SHORT_TEXT EMPTY"
+                          x="213" y="340" width="120" height="60"
+                          isCustomizable="TRUE"
+                          displayName="Bottom Complication">
+            <BoundingRoundBox x="0" y="0" width="120" height="60" cornerRadius="12" />
+            <DefaultProviderPolicy defaultSystemProvider="WATCH_BATTERY" defaultSystemProviderType="SHORT_TEXT" />
+            <Complication type="SHORT_TEXT">
+                <!-- Monochromatic Image (Icon) - starts at relative 0 (x=213 screen) -> center is 12 (x=225 screen) -->
+                <PartImage x="0" y="18" width="24" height="24" tintColor="#FFFFFFFF">
+                    <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+                </PartImage>
+
+                <!-- Small Image (colored, e.g. Weather Icon) - starts at relative 0 (x=213 screen) -> center is 12 (x=225 screen) -->
+                <PartImage x="0" y="18" width="24" height="24">
+                    <Image resource="[COMPLICATION.SMALL_IMAGE]" />
+                </PartImage>
+
+                <!-- Main Complication Text - positioned to the right of the icon -->
+                <PartText x="32" y="0" width="88" height="60">
+                    <Text align="START">
+                        <Font family="jetbrains_mono" size="20" weight="BOLD" color="#ffffffff">
+                            <Template>%s %s<Parameter expression="[COMPLICATION.TEXT]" /><Parameter expression="[COMPLICATION.TITLE]" /></Template>
+                        </Font>
+                    </Text>
+                </PartText>
+            </Complication>
+        </ComplicationSlot>
     </Scene>
 </WatchFace>
