@@ -11,6 +11,16 @@
             </Arc>
         </PartDraw>
 
+        <!-- Thin gray line through Sun and Earth (noon-midnight line) -->
+        <Group name="noon_midnight_line" x="0" y="0" width="450" height="450" pivotX="0.5" pivotY="0.5">
+            <Transform target="angle" value="[DAY_OF_YEAR] * 0.9863" />
+            <PartDraw x="0" y="0" width="450" height="450">
+                <Line startX="225" startY="225" endX="450" endY="225">
+                    <Stroke color="#44FFFFFF" thickness="2" />
+                </Line>
+            </PartDraw>
+        </Group>
+
         <!-- Earth Group (contains Earth sphere and user's meridian) -->
         <Group name="earth_group" x="213" y="213" width="24" height="24">
             <Transform target="x"
@@ -39,19 +49,19 @@
         </Group>
 
         <!-- Moon orbit ring (follows Earth) -->
-        <Group name="moon_orbit_group" x="190" y="190" width="70" height="70">
-            <Transform target="x"
-                value="225 + 120 * cos([DAY_OF_YEAR] * 0.0172142) - 35" />
-            <Transform target="y"
-                value="225 + 120 * sin([DAY_OF_YEAR] * 0.0172142) - 35" />
-            <PartDraw x="0" y="0" width="70" height="70">
-                <Arc centerX="35" centerY="35"
-                     width="70" height="70"
-                     startAngle="0" endAngle="360">
-                    <Stroke color="#22FFFFFF" thickness="2" />
-                </Arc>
-            </PartDraw>
-        </Group>
+<!--        <Group name="moon_orbit_group" x="190" y="190" width="70" height="70">-->
+<!--            <Transform target="x"-->
+<!--                value="225 + 120 * cos([DAY_OF_YEAR] * 0.0172142) - 35" />-->
+<!--            <Transform target="y"-->
+<!--                value="225 + 120 * sin([DAY_OF_YEAR] * 0.0172142) - 35" />-->
+<!--            <PartDraw x="0" y="0" width="70" height="70">-->
+<!--                <Arc centerX="35" centerY="35"-->
+<!--                     width="70" height="70"-->
+<!--                     startAngle="0" endAngle="360">-->
+<!--                    <Stroke color="#22FFFFFF" thickness="2" />-->
+<!--                </Arc>-->
+<!--            </PartDraw>-->
+<!--        </Group>-->
 
         <!-- Moon: position derived from system [MOON_PHASE_POSITION] (0-28 lunar cycle).
              Moon angle = Earth→Sun direction + phase fraction of full orbit.
