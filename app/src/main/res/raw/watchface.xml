@@ -87,21 +87,37 @@
             </Ellipse>
         </PartDraw>
         
-        <PartText x="0" y="0" width="450" height="450">
-            <TextCircular centerX="225" centerY="225"
-                width="390" height="390"
-                startAngle="315" endAngle="45"
-                direction="CLOCKWISE">
-                <Font family="jetbrains_mono" size="26" color="#ffffffff">
-                    <Template>%s:%s | %s-%s-%s
+        <!-- Time Display -->
+        <PartText x="0" y="45" width="450" height="80">
+            <Text>
+                <Font family="jetbrains_mono" size="76" color="#FFFFFFFF">
+                    <Template>%s:%s
                         <Parameter expression="[HOUR_0_23_Z]" />
                         <Parameter expression="[MINUTE_Z]" />
-                        <Parameter expression="[YEAR]" />
-                        <Parameter expression="[MONTH_Z]" />
-                        <Parameter expression="[DAY_Z]" />
                     </Template>
                 </Font>
-            </TextCircular>
+            </Text>
         </PartText>
+
+        <!-- Date / Complication Slot -->
+        <ComplicationSlot x="75" y="130" width="300" height="40" slotId="0" supportedTypes="SHORT_TEXT EMPTY">
+            <DefaultProviderPolicy defaultSystemProvider="DAY_AND_DATE" defaultSystemProviderType="SHORT_TEXT"/>
+            <BoundingOval x="0" y="0" width="300" height="40" />
+            <Complication type="SHORT_TEXT">
+                <!-- Group to center both Title and Text horizontally if both are present -->
+                <Group name="short_text_group" x="0" y="0" width="300" height="40">
+                    <PartText x="0" y="0" width="300" height="40">
+                        <Text>
+                            <Font family="jetbrains_mono" size="22" color="#FFCCCCCC">
+                                <Template><![CDATA[%s %s]]>
+                                    <Parameter expression="[COMPLICATION.TITLE]" />
+                                    <Parameter expression="[COMPLICATION.TEXT]" />
+                                </Template>
+                            </Font>
+                        </Text>
+                    </PartText>
+                </Group>
+            </Complication>
+        </ComplicationSlot>
     </Scene>
 </WatchFace>
