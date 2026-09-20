@@ -1,78 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WatchFace width="450" height="450">
+    <UserConfigurations>
+        <ColorConfiguration id="themeColor" displayName="Color Theme" defaultValue="0">
+            <!-- Option 0: Default (Earth Blue) -->
+            <!-- Colors: 1) Earth Fill 2) Orbit Rings 3) Noon/Midnight Line 4) Sun Core 5) Sun Glow 6) Meridian Line -->
+            <ColorOption id="0" displayName="Earth" colors="#FF77B5FE #22FFFFFF #44FFFFFF #FFFFF5D4 #33FFF5D4 #FFFF0000" />
+
+            <!-- Option 1: Monochrome -->
+            <!-- Earth Fill: #FFAAAAAA (Light Gray) -->
+            <!-- Orbit Rings: #22AAAAAA (Very Faint Light Gray) -->
+            <!-- Noon/Midnight Line: #44AAAAAA (Faint Light Gray) -->
+            <!-- Sun Core: #FFE0E0E0 (Very Light Gray) -->
+            <!-- Sun Glow: #33E0E0E0 (Faint Very Light Gray) -->
+            <!-- Meridian Line: #FF777777 (Medium Gray) -->
+            <ColorOption id="1" displayName="Monochrome" colors="#FFAAAAAA #22AAAAAA #44AAAAAA #FFE0E0E0 #33E0E0E0 #FF777777" />
+        </ColorConfiguration>
+    </UserConfigurations>
+
     <Scene backgroundColor="#000000">
 
-        <!-- Earth orbit ring -->
+        <!-- Thin gray line connecting Earth to Sun (noon-midnight line) -->
         <PartDraw x="0" y="0" width="450" height="450">
-            <Arc centerX="225" centerY="225"
-                 width="240" height="240"
-                 startAngle="0" endAngle="360">
-                <Stroke color="#22FFFFFF" thickness="2" />
-            </Arc>
+            <Line startX="225" startY="225" endX="225" endY="450">
+                <Stroke color="[CONFIGURATION.themeColor.2]" thickness="2" />
+            </Line>
         </PartDraw>
-
-        <!-- Thin gray line through Sun and Earth (noon-midnight line) -->
-        <Group name="noon_midnight_line" x="0" y="0" width="450" height="450" pivotX="0.5" pivotY="0.5">
-            <Transform target="angle" value="[DAY_OF_YEAR] * 0.9863" />
-            <PartDraw x="0" y="0" width="450" height="450">
-                <Line startX="225" startY="225" endX="450" endY="225">
-                    <Stroke color="#44FFFFFF" thickness="2" />
-                </Line>
-            </PartDraw>
-        </Group>
 
         <!-- Earth Group (contains Earth sphere and user's meridian) -->
         <Group name="earth_group" x="213" y="213" width="24" height="24">
-            <Transform target="x"
-                value="225 + 120 * cos([DAY_OF_YEAR] * 0.0172142) - 12" />
-            <Transform target="y"
-                value="225 + 120 * sin([DAY_OF_YEAR] * 0.0172142) - 12" />
-
-            <!-- Earth sphere -->
+            <!-- Earth sphere (fixed in center) -->
             <PartDraw x="0" y="0" width="24" height="24">
                 <Ellipse x="0" y="0" width="24" height="24">
-                    <Fill color="#FF77B5FE" />
+                    <Fill color="[CONFIGURATION.themeColor.0]" />
                 </Ellipse>
             </PartDraw>
 
-            <!-- Rotating Meridian Group (extends 450px from center to screen edge, starting at Earth surface 12px out) -->
+            <!-- Rotating Meridian Group (extends 450px from center to screen edge) -->
             <Group name="meridian_group" x="-438" y="-438" width="900" height="900" pivotX="0.5" pivotY="0.5">
-                <Transform target="angle" value="[DAY_OF_YEAR] * 0.9863 + [HOUR_0_23] * 15 + [MINUTE] * 0.25 + 90" />
+                <Transform target="angle" value="[HOUR_0_23] * 15 + [MINUTE] * 0.25" />
 
                 <!-- Red line pointing outwards to the edge of the screen -->
                 <PartDraw x="0" y="0" width="900" height="900">
                     <Line startX="450" startY="0" endX="450" endY="438">
-                        <Stroke color="#FFFF0000" thickness="2" />
+                        <Stroke color="[CONFIGURATION.themeColor.5]" thickness="2" />
                     </Line>
                 </PartDraw>
             </Group>
         </Group>
 
-        <!-- Moon orbit ring (follows Earth) -->
-<!--        <Group name="moon_orbit_group" x="190" y="190" width="70" height="70">-->
-<!--            <Transform target="x"-->
-<!--                value="225 + 120 * cos([DAY_OF_YEAR] * 0.0172142) - 35" />-->
-<!--            <Transform target="y"-->
-<!--                value="225 + 120 * sin([DAY_OF_YEAR] * 0.0172142) - 35" />-->
-<!--            <PartDraw x="0" y="0" width="70" height="70">-->
-<!--                <Arc centerX="35" centerY="35"-->
-<!--                     width="70" height="70"-->
-<!--                     startAngle="0" endAngle="360">-->
-<!--                    <Stroke color="#22FFFFFF" thickness="2" />-->
-<!--                </Arc>-->
-<!--            </PartDraw>-->
-<!--        </Group>-->
+        <!-- Moon orbit ring (centered on Earth) -->
+        <Group name="moon_orbit_group" x="190" y="190" width="70" height="70">
+            <PartDraw x="0" y="0" width="70" height="70">
+                <Arc centerX="35" centerY="35"
+                     width="70" height="70"
+                     startAngle="0" endAngle="360">
+                    <Stroke color="[CONFIGURATION.themeColor.1]" thickness="2" />
+                </Arc>
+            </PartDraw>
+        </Group>
 
-        <!-- Moon: position derived from system [MOON_PHASE_POSITION] (0-28 lunar cycle).
-             Moon angle = Earth→Sun direction + phase fraction of full orbit.
-             Earth→Sun = DAY_OF_YEAR * 0.0172142 + π
-             Phase angle = MOON_PHASE * 2π/28 = MOON_PHASE * 0.2244
-             Combined: DAY_OF_YEAR * 0.0172142 + MOON_PHASE * 0.2244 + 3.1416 -->
+        <!-- Moon: position derived from system [MOON_PHASE_POSITION] (0-28 lunar cycle). -->
         <Group name="moon_group" x="220" y="220" width="10" height="10">
+            <!-- New Moon (phase 0) aligns with Sun at the bottom (+Y, or 90 degrees/1.5708 radians) -->
             <Transform target="x"
-                value="225 + 120 * cos([DAY_OF_YEAR] * 0.0172142) + 35 * cos([DAY_OF_YEAR] * 0.0172142 + [MOON_PHASE_POSITION] * 0.2244 + 3.1416) - 5" />
+                value="225 + 35 * cos([MOON_PHASE_POSITION] * 0.2244 + 1.5708) - 5" />
             <Transform target="y"
-                value="225 + 120 * sin([DAY_OF_YEAR] * 0.0172142) + 35 * sin([DAY_OF_YEAR] * 0.0172142 + [MOON_PHASE_POSITION] * 0.2244 + 3.1416) - 5" />
+                value="225 + 35 * sin([MOON_PHASE_POSITION] * 0.2244 + 1.5708) - 5" />
             <PartDraw x="0" y="0" width="10" height="10">
                 <Ellipse x="0" y="0" width="10" height="10">
                     <Fill color="#FFEAEAEA" />
@@ -80,17 +73,17 @@
             </PartDraw>
         </Group>
 
-        <!-- Sun glow -->
+        <!-- Sun glow (fixed at bottom edge) -->
         <PartDraw x="0" y="0" width="450" height="450">
-            <Ellipse x="180" y="180" width="90" height="90">
-                <Fill color="#33FFF5D4" />
+            <Ellipse x="-25" y="370" width="500" height="500">
+                <Fill color="[CONFIGURATION.themeColor.4]" />
             </Ellipse>
         </PartDraw>
 
-        <!-- Sun core -->
+        <!-- Sun core (fixed at bottom edge) -->
         <PartDraw x="0" y="0" width="450" height="450">
-            <Ellipse x="195" y="195" width="60" height="60">
-                <Fill color="#FFFFF5D4" />
+            <Ellipse x="25" y="420" width="400" height="400">
+                <Fill color="[CONFIGURATION.themeColor.3]" />
             </Ellipse>
         </PartDraw>
         
@@ -100,7 +93,7 @@
                 startAngle="315" endAngle="45"
                 direction="CLOCKWISE">
                 <Font family="jetbrains_mono" size="26" color="#ffffffff">
-                    <Template>%s:%s • %s-%s-%s
+                    <Template>%s:%s | %s-%s-%s
                         <Parameter expression="[HOUR_0_23_Z]" />
                         <Parameter expression="[MINUTE_Z]" />
                         <Parameter expression="[YEAR]" />

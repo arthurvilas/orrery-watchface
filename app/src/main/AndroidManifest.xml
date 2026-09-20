@@ -14,7 +14,7 @@
                 android:value="true" />
         <property
             android:name="com.google.wear.watchface.format.version"
-            android:value="2" />
+            android:value="4" />
     </application>
 
 </manifest>
