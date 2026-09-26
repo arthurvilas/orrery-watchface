@@ -3,17 +3,22 @@
     <UserConfigurations>
         <ColorConfiguration id="themeColor" displayName="Color Theme" defaultValue="0">
             <!-- Option 0: Default (Earth Blue) -->
-            <!-- Colors: 1) Earth Fill 2) Orbit Rings 3) Noon/Midnight Line 4) Sun Core 5) Sun Glow 6) Meridian Line -->
+            <!-- 1) Earth Fill: #FF77B5FE -->
+            <!-- 2) Orbit Rings: #22FFFFFF -->
+            <!-- 3) Noon/Midnight Line: #44FFFFFF -->
+            <!-- 4) Sun Core: #FFFFF5D4 -->
+            <!-- 5) Sun Glow: #33FFF5D4 -->
+            <!-- 6) Meridian Line: #FFFF0000 -->
             <ColorOption id="0" displayName="Earth" colors="#FF77B5FE #22FFFFFF #44FFFFFF #FFFFF5D4 #33FFF5D4 #FFFF0000" />
 
             <!-- Option 1: Monochrome -->
             <!-- Earth Fill: #FFAAAAAA (Light Gray) -->
-            <!-- Orbit Rings: #22AAAAAA (Very Faint Light Gray) -->
+            <!-- Orbit Rings: #44AAAAAA (Faint Light Gray) -->
             <!-- Noon/Midnight Line: #44AAAAAA (Faint Light Gray) -->
             <!-- Sun Core: #FFE0E0E0 (Very Light Gray) -->
             <!-- Sun Glow: #33E0E0E0 (Faint Very Light Gray) -->
             <!-- Meridian Line: #FF777777 (Medium Gray) -->
-            <ColorOption id="1" displayName="Monochrome" colors="#FFAAAAAA #22AAAAAA #44AAAAAA #FFE0E0E0 #33E0E0E0 #FF777777" />
+            <ColorOption id="1" displayName="Monochrome" colors="#FFAAAAAA #44AAAAAA #44AAAAAA #FFE0E0E0 #33E0E0E0 #FF777777" />
         </ColorConfiguration>
     </UserConfigurations>
 
@@ -102,13 +107,13 @@
         <!-- Date / Complication Slot -->
         <ComplicationSlot x="75" y="130" width="300" height="40" slotId="0" supportedTypes="SHORT_TEXT EMPTY">
             <DefaultProviderPolicy defaultSystemProvider="DAY_AND_DATE" defaultSystemProviderType="SHORT_TEXT"/>
-            <BoundingOval x="0" y="0" width="300" height="40" />
+            <BoundingBox x="0" y="0" width="300" height="40" />
             <Complication type="SHORT_TEXT">
                 <!-- Group to center both Title and Text horizontally if both are present -->
                 <Group name="short_text_group" x="0" y="0" width="300" height="40">
                     <PartText x="0" y="0" width="300" height="40">
                         <Text>
-                            <Font family="jetbrains_mono" size="22" color="#FFCCCCCC">
+                            <Font family="jetbrains_mono" size="24" color="#FFCCCCCC">
                                 <Template><![CDATA[%s %s]]>
                                     <Parameter expression="[COMPLICATION.TITLE]" />
                                     <Parameter expression="[COMPLICATION.TEXT]" />
@@ -117,6 +122,130 @@
                         </Text>
                     </PartText>
                 </Group>
+            </Complication>
+        </ComplicationSlot>
+
+        <!-- Bottom Right Complication Slot 1 -->
+        <ComplicationSlot x="280" y="220" width="168" height="32" slotId="1" supportedTypes="SHORT_TEXT MONOCHROMATIC_IMAGE SMALL_IMAGE EMPTY">
+            <BoundingBox x="0" y="0" width="168" height="32" />
+            <Complication type="SHORT_TEXT">
+                <Group name="short_text_group" x="0" y="0" width="168" height="32">
+                    <PartImage x="0" y="4" width="24" height="24" tintColor="#FFCCCCCC">
+                        <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+                    </PartImage>
+                    <PartText x="28" y="0" width="140" height="32">
+                        <Text align="START">
+                            <Font family="jetbrains_mono" size="16" color="#FFCCCCCC">
+                                <Template><![CDATA[%s]]>
+                                    <Parameter expression="[COMPLICATION.TEXT]" />
+                                </Template>
+                            </Font>
+                        </Text>
+                    </PartText>
+                </Group>
+            </Complication>
+            <Complication type="MONOCHROMATIC_IMAGE">
+                <PartImage x="72" y="4" width="24" height="24" tintColor="#FFCCCCCC">
+                    <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+                </PartImage>
+            </Complication>
+            <Complication type="SMALL_IMAGE">
+                <PartImage x="72" y="4" width="24" height="24">
+                    <Image resource="[COMPLICATION.SMALL_IMAGE]" />
+                </PartImage>
+            </Complication>
+        </ComplicationSlot>
+
+        <!-- Bottom Right Complication Slot 2 -->
+        <ComplicationSlot x="280" y="256" width="161" height="32" slotId="2" supportedTypes="SHORT_TEXT MONOCHROMATIC_IMAGE SMALL_IMAGE EMPTY">
+            <BoundingBox x="0" y="0" width="161" height="32" />
+            <Complication type="SHORT_TEXT">
+                <Group name="short_text_group" x="0" y="0" width="161" height="32">
+                    <PartImage x="0" y="4" width="24" height="24" tintColor="#FFCCCCCC">
+                        <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+                    </PartImage>
+                    <PartText x="28" y="0" width="133" height="32">
+                        <Text align="START">
+                            <Font family="jetbrains_mono" size="16" color="#FFCCCCCC">
+                                <Template><![CDATA[%s]]>
+                                    <Parameter expression="[COMPLICATION.TEXT]" />
+                                </Template>
+                            </Font>
+                        </Text>
+                    </PartText>
+                </Group>
+            </Complication>
+            <Complication type="MONOCHROMATIC_IMAGE">
+                <PartImage x="68" y="4" width="24" height="24" tintColor="#FFCCCCCC">
+                    <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+                </PartImage>
+            </Complication>
+            <Complication type="SMALL_IMAGE">
+                <PartImage x="68" y="4" width="24" height="24">
+                    <Image resource="[COMPLICATION.SMALL_IMAGE]" />
+                </PartImage>
+            </Complication>
+        </ComplicationSlot>
+
+        <!-- Bottom Right Complication Slot 3 -->
+        <ComplicationSlot x="280" y="292" width="147" height="32" slotId="3" supportedTypes="SHORT_TEXT MONOCHROMATIC_IMAGE SMALL_IMAGE EMPTY">
+            <BoundingBox x="0" y="0" width="147" height="32" />
+            <Complication type="SHORT_TEXT">
+                <Group name="short_text_group" x="0" y="0" width="147" height="32">
+                    <PartImage x="0" y="4" width="24" height="24" tintColor="#FFCCCCCC">
+                        <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+                    </PartImage>
+                    <PartText x="28" y="0" width="119" height="32">
+                        <Text align="START">
+                            <Font family="jetbrains_mono" size="16" color="#FFCCCCCC">
+                                <Template><![CDATA[%s]]>
+                                    <Parameter expression="[COMPLICATION.TEXT]" />
+                                </Template>
+                            </Font>
+                        </Text>
+                    </PartText>
+                </Group>
+            </Complication>
+            <Complication type="MONOCHROMATIC_IMAGE">
+                <PartImage x="61" y="4" width="24" height="24" tintColor="#FFCCCCCC">
+                    <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+                </PartImage>
+            </Complication>
+            <Complication type="SMALL_IMAGE">
+                <PartImage x="61" y="4" width="24" height="24">
+                    <Image resource="[COMPLICATION.SMALL_IMAGE]" />
+                </PartImage>
+            </Complication>
+        </ComplicationSlot>
+
+        <!-- Bottom Right Complication Slot 4 -->
+        <ComplicationSlot x="280" y="328" width="125" height="32" slotId="4" supportedTypes="SHORT_TEXT MONOCHROMATIC_IMAGE SMALL_IMAGE EMPTY">
+            <BoundingBox x="0" y="0" width="125" height="32" />
+            <Complication type="SHORT_TEXT">
+                <Group name="short_text_group" x="0" y="0" width="125" height="32">
+                    <PartImage x="0" y="4" width="24" height="24" tintColor="#FFCCCCCC">
+                        <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+                    </PartImage>
+                    <PartText x="28" y="0" width="97" height="32">
+                        <Text align="START">
+                            <Font family="jetbrains_mono" size="16" color="#FFCCCCCC">
+                                <Template><![CDATA[%s]]>
+                                    <Parameter expression="[COMPLICATION.TEXT]" />
+                                </Template>
+                            </Font>
+                        </Text>
+                    </PartText>
+                </Group>
+            </Complication>
+            <Complication type="MONOCHROMATIC_IMAGE">
+                <PartImage x="50" y="4" width="24" height="24" tintColor="#FFCCCCCC">
+                    <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+                </PartImage>
+            </Complication>
+            <Complication type="SMALL_IMAGE">
+                <PartImage x="50" y="4" width="24" height="24">
+                    <Image resource="[COMPLICATION.SMALL_IMAGE]" />
+                </PartImage>
             </Complication>
         </ComplicationSlot>
     </Scene>
