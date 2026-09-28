@@ -26,7 +26,7 @@
 
         <!-- Thin gray line connecting Earth to Sun (noon-midnight line) -->
         <PartDraw x="0" y="0" width="450" height="450">
-            <Line startX="225" startY="237" endX="225" endY="450">
+            <Line startX="225" startY="0" endX="225" endY="213">
                 <Stroke color="[CONFIGURATION.themeColor.2]" thickness="2" />
             </Line>
         </PartDraw>
@@ -55,7 +55,7 @@
 
                 <!-- Red line pointing outwards to the edge of the screen -->
                 <PartDraw x="0" y="0" width="900" height="900">
-                    <Line startX="450" startY="0" endX="450" endY="438">
+                    <Line startX="450" startY="462" endX="450" endY="900">
                         <Stroke color="[CONFIGURATION.themeColor.5]" thickness="2" />
                     </Line>
                 </PartDraw>
@@ -75,11 +75,11 @@
 
         <!-- Moon: position derived from system [MOON_PHASE_POSITION] (0-28 lunar cycle). -->
         <Group name="moon_group" x="220" y="220" width="10" height="10">
-            <!-- New Moon (phase 0) aligns with Sun at the bottom (+Y, or 90 degrees/1.5708 radians) -->
+            <!-- New Moon (phase 0) aligns with Sun at the top (-Y, or -90 degrees/-1.5708 radians) -->
             <Transform target="x"
-                value="225 + 35 * cos([MOON_PHASE_POSITION] * 0.2244 + 1.5708) - 5" />
+                value="225 + 35 * cos([MOON_PHASE_POSITION] * 0.2244 - 1.5708) - 5" />
             <Transform target="y"
-                value="225 + 35 * sin([MOON_PHASE_POSITION] * 0.2244 + 1.5708) - 5" />
+                value="225 + 35 * sin([MOON_PHASE_POSITION] * 0.2244 - 1.5708) - 5" />
             <!-- Interactive Moon Fill -->
             <PartDraw x="0" y="0" width="10" height="10">
                 <Variant mode="AMBIENT" target="alpha" value="0" />
@@ -97,26 +97,26 @@
             </PartDraw>
         </Group>
 
-        <!-- Sun glow (fixed at bottom edge) -->
+        <!-- Sun glow (fixed at top edge) -->
         <PartDraw x="0" y="0" width="450" height="450">
             <!-- Hide completely in ambient mode -->
             <Variant mode="AMBIENT" target="alpha" value="0" />
-            <Ellipse x="-25" y="370" width="500" height="500">
+            <Ellipse x="-25" y="-420" width="500" height="500">
                 <Fill color="[CONFIGURATION.themeColor.4]" />
             </Ellipse>
         </PartDraw>
 
-        <!-- Sun core (fixed at bottom edge) -->
+        <!-- Sun core (fixed at top edge) -->
         <PartDraw x="0" y="0" width="450" height="450">
             <!-- Hide completely in ambient mode -->
             <Variant mode="AMBIENT" target="alpha" value="0" />
-            <Ellipse x="25" y="420" width="400" height="400">
+            <Ellipse x="25" y="-370" width="400" height="400">
                 <Fill color="[CONFIGURATION.themeColor.3]" />
             </Ellipse>
         </PartDraw>
         
         <!-- Interactive Time Display -->
-        <PartText x="0" y="45" width="450" height="80">
+        <PartText x="0" y="280" width="450" height="80">
             <!-- Fade out when entering ambient mode -->
             <Variant mode="AMBIENT" target="alpha" value="0" />
             <Text>
@@ -130,7 +130,7 @@
         </PartText>
 
         <!-- Ambient Time Display (Hollow Outline) -->
-        <PartText x="0" y="45" width="450" height="80" alpha="0">
+        <PartText x="0" y="280" width="450" height="80" alpha="0">
             <!-- Fade in when entering ambient mode -->
             <Variant mode="AMBIENT" target="alpha" value="255" />
             <Text>
@@ -146,7 +146,7 @@
         </PartText>
 
         <!-- Date / Complication Slot -->
-        <ComplicationSlot x="75" y="130" width="300" height="40" slotId="0" supportedTypes="SHORT_TEXT EMPTY">
+        <ComplicationSlot x="75" y="365" width="300" height="40" slotId="0" supportedTypes="SHORT_TEXT EMPTY">
             <!-- Hide completely in ambient mode -->
             <Variant mode="AMBIENT" target="alpha" value="0" />
             <DefaultProviderPolicy defaultSystemProvider="DAY_AND_DATE" defaultSystemProviderType="SHORT_TEXT"/>
@@ -168,8 +168,8 @@
             </Complication>
         </ComplicationSlot>
 
-        <!-- Bottom Right Complication Slot 1 -->
-        <ComplicationSlot x="280" y="230" width="165" height="40" slotId="1" supportedTypes="SHORT_TEXT MONOCHROMATIC_IMAGE SMALL_IMAGE EMPTY">
+        <!-- Top Right Complication Slot 1 -->
+        <ComplicationSlot x="280" y="190" width="165" height="40" slotId="1" supportedTypes="SHORT_TEXT MONOCHROMATIC_IMAGE SMALL_IMAGE EMPTY">
             <!-- Hide completely in ambient mode -->
             <Variant mode="AMBIENT" target="alpha" value="0" />
             <BoundingBox x="0" y="0" width="165" height="40" />
@@ -196,8 +196,8 @@
             </Complication>
         </ComplicationSlot>
 
-        <!-- Bottom Right Complication Slot 2 -->
-        <ComplicationSlot x="280" y="280" width="148" height="40" slotId="2" supportedTypes="SHORT_TEXT MONOCHROMATIC_IMAGE SMALL_IMAGE EMPTY">
+        <!-- Top Right Complication Slot 2 -->
+        <ComplicationSlot x="280" y="140" width="148" height="40" slotId="2" supportedTypes="SHORT_TEXT MONOCHROMATIC_IMAGE SMALL_IMAGE EMPTY">
             <!-- Hide completely in ambient mode -->
             <Variant mode="AMBIENT" target="alpha" value="0" />
             <BoundingBox x="0" y="0" width="148" height="40" />
@@ -224,8 +224,8 @@
             </Complication>
         </ComplicationSlot>
 
-        <!-- Bottom Right Complication Slot 3 -->
-        <ComplicationSlot x="280" y="330" width="117" height="40" slotId="3" supportedTypes="SHORT_TEXT MONOCHROMATIC_IMAGE SMALL_IMAGE EMPTY">
+        <!-- Top Right Complication Slot 3 -->
+        <ComplicationSlot x="280" y="90" width="117" height="40" slotId="3" supportedTypes="SHORT_TEXT MONOCHROMATIC_IMAGE SMALL_IMAGE EMPTY">
             <!-- Hide completely in ambient mode -->
             <Variant mode="AMBIENT" target="alpha" value="0" />
             <BoundingBox x="0" y="0" width="117" height="40" />
